@@ -33,3 +33,18 @@ class Curso(models.Model):
 
     def __str__(self) -> str:
         return self.codigo
+
+
+class Matricula(models.Model):
+    OPCOES_PERIODO = [("M", "MATUTINO"), ("V", "VESPERTINO"), ("N", "NOTURNO")]
+
+    estudante = models.ForeignKey(Estudante, on_delete=models.CASCADE)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    periodo = models.CharField(
+        max_length=1,
+        blank=False,
+        null=False,
+        choices=OPCOES_PERIODO,
+        default="M",
+        verbose_name="Período",
+    )
