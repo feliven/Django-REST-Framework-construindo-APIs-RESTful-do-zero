@@ -6,8 +6,8 @@ class Estudante(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(max_length=50, blank=False)
     CPF = models.CharField(max_length=11)
-    data_nascimento = models.DateField()
-    numero_celular = models.CharField(max_length=14)
+    data_nascimento = models.DateField(verbose_name="Data de nascimento")
+    numero_celular = models.CharField(max_length=14, verbose_name="Número de celular")
 
     def __str__(self) -> str:
         return self.nome
@@ -20,12 +20,15 @@ class Curso(models.Model):
         ("A", "Avançado"),
     ]
 
-    codigo = models.CharField(max_length=10)
-    descricao = models.TextField(
-        blank=False,
-    )
+    codigo = models.CharField(max_length=10, verbose_name="Código")
+    descricao = models.TextField(blank=False, verbose_name="Descrição")
     nivel = models.CharField(
-        max_length=1, blank=False, null=False, choices=OPCOES_NIVEL, default="B"
+        max_length=1,
+        blank=False,
+        null=False,
+        choices=OPCOES_NIVEL,
+        default="B",
+        verbose_name="Nível",
     )
 
     def __str__(self) -> str:
