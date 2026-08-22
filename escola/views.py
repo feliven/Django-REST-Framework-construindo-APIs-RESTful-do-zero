@@ -1,9 +1,16 @@
-from django.http import HttpRequest, JsonResponse
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from escola.models import Estudante, Curso
+from escola.serializers import EstudanteSerializer, CursoSerializer
 
 
-def estudantes(request: HttpRequest):
-    if request.method == "GET":
-        estudante = {"id": 1, "nome": "Eu"}
-        return JsonResponse(estudante)
+class EstudanteViewSet(viewsets.ModelViewSet):
+    queryset = Estudante.objects.all()
+    serializer_class = EstudanteSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-    return JsonResponse({})
+
+class CursoViewSet(viewsets.ModelViewSet):
+    queryset = Curso.objects.all()
+    serializer_class = CursoSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
